@@ -1,0 +1,28 @@
+# Core data / numerics
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+scikit-learn>=1.3
+kneed>=0.8            # Kneedle elbow detection (Satopaa et al. 2011)
+
+# Audio harvest + I/O
+yt-dlp>=2024.1
+soundfile>=0.12
+# ffmpeg must be available on PATH for resampling to 16 kHz mono
+
+# Models (heavy; needed only for Phase 1/2 on a machine with the data + GPU)
+torch>=2.0
+torchaudio>=2.0
+pyannote.audio>=3.1   # diarization -> RTTM
+speechbrain>=1.0      # ECAPA-TDNN embeddings
+silero-vad>=5.0       # optional VAD turn-trim
+
+# Phase-1 review UI (source review app + playlist browser page)
+streamlit>=1.30
+
+# Plotting (paper figures)
+matplotlib>=3.7
+seaborn>=0.12
+
+# Tests
+pytest>=7.4

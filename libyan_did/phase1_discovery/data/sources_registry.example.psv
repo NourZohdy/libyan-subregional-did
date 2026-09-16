@@ -1,0 +1,9 @@
+url | url_type | region | source | channel_id | video_count | playlist_count | format_type | lang_flag | confidence | evidence | discovery_path | status | notes
+# Pipe-delimited (Arabic titles contain commas). The discovery agent emits rows with status=pending;
+# you flip rows to `approved`, then: python scripts/acquire_channels.py --registry <this file> --root "D:\Research\DID_Set\libyan"
+# region in {Tripolitania, Cyrenaica, Fezzan, Mixed, Non-Libyan, Unknown}; lang_flag in {arabic, code-switch:<lang>, minority:<lang>}.
+# video_count = videos on the channel; playlist_count = shows (playlists). Backfill both with scripts/enrich_candidates.py.
+# A multi-region channel: set status=expand, then scripts/expand_channels.py splits it into per-show playlist rows.
+# The two example rows below are illustrative — delete them before harvesting.
+https://www.youtube.com/@exampleSouth | channel | Fezzan | مثال سبها | UCxxxxxxxx | 25 | 4 | podcast | arabic | high | وصف القناة يذكر سبها والجنوب | بودكاست سبها | pending | guest-based, many speakers
+https://www.youtube.com/playlist?list=PLyyy | playlist | Cyrenaica | حوار بنغازي | UCyyyyyyyy | 14 |  | street_interview | arabic | medium | عناوين تذكر بنغازي | ميكروفون الشارع | pending | borderline dialect, reviewer to confirm

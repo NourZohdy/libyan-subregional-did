@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "libyan-did"
+version = "0.1.0"
+description = "Libyan Arabic sub-national dialect-identification speech corpus pipeline"
+readme = "README.md"
+requires-python = ">=3.10"
+# The heavy ML stack (torch+cuda, speechbrain, transformers, pyannote, …) is pinned in
+# requirements.txt and installed separately. Keeping `dependencies` empty here means
+# `pip install -e .` only wires up the import path, without re-resolving the GPU stack.
+dependencies = []
+
+[tool.setuptools.packages.find]
+# Only the code package is importable; data/output/paper dirs at the repo root are not packages.
+include = ["libyan_did*"]
