@@ -15,7 +15,8 @@ three regions: **Tripolitania** (west), **Cyrenaica** (east), **Fezzan** (south)
 splits and a second, channel-disjoint split.
 
 **We do not redistribute audio.** The package gives you the segment manifest, the source
-identifiers needed to fetch the audio yourself, and cached embeddings from two pretrained
+identifiers to fetch the audio yourself (a YouTube video ID for 717 of the 739 YouTube
+recordings; a public account handle plus clip caption for every TikTok clip), and cached embeddings from two pretrained
 models so the paper's probe benchmarks can be reproduced without any audio.
 
 ## Files
@@ -23,7 +24,7 @@ models so the paper's probe benchmarks can be reproduced without any audio.
 | File | What it is |
 |---|---|
 | `segments.csv` | 78,411 rows, one per released segment. Columns below. |
-| `channels.csv` | 161 rows, one per channel: platform, region, URL or handle, split, size. |
+| `channels.csv` | 161 rows, one per channel: platform, majority region, URL or handle where known, channel split, size. |
 | `ecapa_spkrec_192.npy` | float32 `[78411, 192]`. Speaker-recognition ECAPA-TDNN embedding (`speechbrain/spkrec-ecapa-voxceleb`) of each segment. Row *i* is `segments.csv` row *i*. Model E2 in the paper. |
 | `lid_ecapa_256.npy` | float32 `[78411, 256]`. VoxLingua107 language-ID ECAPA embedding (`speechbrain/lang-id-voxlingua107-ecapa`) of each segment. Row *i* is `segments.csv` row *i*. Model E5 in the paper. |
 | `pipeline_v1.0.zip` | The `libyan_did` Python package: discovery, harvesting, diarization and segmentation, quality gates, clustering and linking, validation tooling, split generation, and the benchmark scripts (E0–E6). |
@@ -42,11 +43,12 @@ fine-tuned model (E6) are released, so no label information enters the released 
 | `channel_id` | Source channel: a YouTube channel or playlist name, or `tiktok_<handle>`. 161 distinct values. |
 | `platform` | `youtube` or `tiktok`. |
 | `youtube_id` | YouTube video ID (YouTube rows). Empty for 22 of the 739 YouTube recordings (1,913 segments) whose ID could not be recovered. |
-| `source_url` | Channel or playlist URL where known. |
+| `source_url` | Channel or playlist URL where we recorded one (14 of the 57 YouTube channels). Locate YouTube audio by `youtube_id`, not by this column. |
 | `tiktok_handle` | Public TikTok account handle (TikTok rows). |
 | `local_filename` | Our local recording filename for TikTok clips; it contains the clip's public caption and lets you match the clip on the account page. |
 | `start_time`, `end_time`, `duration` | Segment boundaries in seconds within the recording, after our diarization and pause-based cutting. |
-| `region` | Released label: `Tripolitania`, `Cyrenaica`, or `Fezzan`. |
+| `region` | Released label: `Tripolitania`, `Cyrenaica`, or `Fezzan`. This is the label after human review. |
+| `provenance_region` | The channel's region before review. Differs from `region` for the 31 relabelled speakers (6,285 segments). |
 | `speaker_id` | Anonymous speaker identifier (`spk_00000` …), constant across recordings and channels for the same speaker after cross-episode linking. 645 distinct values. |
 | `split` | Speaker-disjoint split: `train`, `dev`, `test` (80/10/10 by duration). A speaker appears in exactly one split. This is the paper's main benchmark split. |
 | `channel_split` | Channel-disjoint split: `train`, `dev`, `test`. A channel appears in exactly one split. Used for the robustness test in Section 5.7 of the paper. |
