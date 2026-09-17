@@ -25,6 +25,7 @@ models so the paper's probe benchmarks can be reproduced without any audio.
 | File | What it is |
 |---|---|
 | `segments.csv` | 78,411 rows, one per released segment. Columns below. |
+| `data/speaker_disjoint/{train,dev,test}.csv`, `data/channel_disjoint/{train,dev,test}.csv` | The same rows as `segments.csv`, cut by the `split` column (paper's main speaker-disjoint benchmark) or the `channel_split` column, so the dataset viewer shows train/dev/test. Use their `segment_id` column, not their local row number, to index the `.npy` files. |
 | `channels.csv` | 161 rows, one per channel: platform, majority region, URL or handle where known, channel split, size. |
 | `ecapa_spkrec_192.npy` | float32 `[78411, 192]`. Speaker-recognition ECAPA-TDNN embedding (`speechbrain/spkrec-ecapa-voxceleb`) of each segment. Row *i* is `segments.csv` row *i*. Model E2 in the paper. |
 | `lid_ecapa_256.npy` | float32 `[78411, 256]`. VoxLingua107 language-ID ECAPA embedding (`speechbrain/lang-id-voxlingua107-ecapa`) of each segment. Row *i* is `segments.csv` row *i*. Model E5 in the paper. |
