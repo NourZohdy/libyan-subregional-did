@@ -7,6 +7,7 @@ Release package for the paper
 
 DOI of this package: https://doi.org/10.5281/zenodo.22802659
 Code repository: https://github.com/NourZohdy/libyan-subregional-did
+Hugging Face dataset: https://huggingface.co/datasets/NourZohdy/libyan-subregional-did
 
 The corpus is Libyan Arabic speech from public YouTube and TikTok media, labeled with one of
 three regions: **Tripolitania** (west), **Cyrenaica** (east), **Fezzan** (south). It has
